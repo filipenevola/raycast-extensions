@@ -20,9 +20,15 @@ export const runShortcutSequence = async (sequence: Sequence) => {
       : "";
     const script = `tell application "${currentApplication.name}"
             tell application "System Events"
-                keystroke ${keystroke} ${modifier}
+                keystroke "\`" using control down
+                delay 0.05
+                keystroke 6
+                delay 0.05
+                keystroke 2
+                keystroke return
             end tell
         end tell`;
+    console.log(`${keystroke} ${modifier}`, keystroke);
     await runAppleScript(script);
   });
   await showHUD(`Ran Shortcut Sequence: ${sequence.name}`);
